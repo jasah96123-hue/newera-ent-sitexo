@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NewEra.Ent All Hail Lust</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #matrix-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        #title {
+            font-size: 4em;
+            text-align: center;
+            text-shadow: 0 0 20px #00ff00, 0 0 40px #00ff00;
+            z-index: 1;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .lust {
+            position: absolute;
+            font-size: 2.5em;  /* Slightly smaller for more instances */
+            color: #00ff00;
+            text-shadow: 0 0 20px #00ff00, 0 0 40px #00ff00;
+            animation: fallDown linear infinite;
+            z-index: 2;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px #00ff00; }
+            to { text-shadow: 0 0 30px #00ff00, 0 0 40px #00ff00; }
+        }
+
+        @keyframes fallDown {
+            0% { transform: translateY(-100vh); }  /* Start above the screen */
+            100% { transform: translateY(100vh); }  /* End below the screen */
+        }
+    </style>
+</head>
+<body>
+    <canvas id="matrix-bg"></canvas>
+    <div id="title">NewEra.Ent<br>All Hail</div>
+    <!-- More Lust elements for "more" -->
+    <div class="lust" style="left: 5%; animation-duration: 5s; animation-delay: 0s;">Lust</div>
+    <div class="lust" style="left: 15%; animation-duration: 4.5s; animation-delay: 0.5s;">Lust</div>
+    <div class="lust" style="left: 25%; animation-duration: 6s; animation-delay: 1s;">Lust</div>
+    <div class="lust" style="left: 35%; animation-duration: 4.8s; animation-delay: 1.5s;">Lust</div>
+    <div class="lust" style="left: 45%; animation-duration: 5.2s; animation-delay: 2s;">Lust</div>
+    <div class="lust" style="left: 55%; animation-duration: 6.5s; animation-delay: 2.5s;">Lust</div>
+    <div class="lust" style="left: 65%; animation-duration: 4.2s; animation-delay: 3s;">Lust</div>
+    <div class="lust" style="left: 75%; animation-duration: 5.8s; animation-delay: 3.5s;">Lust</div>
+    <div class="lust" style="left: 85%; animation-duration: 4.7s; animation-delay: 4s;">Lust</div>
+    <div class="lust" style="left: 95%; animation-duration: 6.2s; animation-delay: 4.5s;">Lust</div>
+
+    <script>
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const chars = '01';  // Binary for hacker vibe
+        const fontSize = 20;
+        const columns = Math.floor(canvas.width / fontSize);
+        let drops = Array(columns).fill(0);
+
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';  // Slight fade for trail effect
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#00ff00';  // Bright green
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(draw, 33);  // Smooth 30fps animation
+    </script>
+</body>
+</html>
